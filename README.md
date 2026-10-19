@@ -1,40 +1,55 @@
-# Language-Guided Object Sorting Simulator
+# Vision-Based, Language-Guided Object Manipulation
 
-An assignment-scale browser application demonstrating rule-based language understanding, object selection, action sequencing, capacity validation, and a 2D animated pick-and-place simulation.
+A small Python robotics assignment: instruction → image perception → grasp feasibility → collision-aware carrying route → execution → image-based verification.
 
-## Demo screenshot
+## Start on macOS / Linux
+Requires Python 3.12 (tested), internet for first dependency installation, and a browser.
 
-![Small blue block successfully placed in the left tray](docs/screenshots/sorting-demo.jpg)
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python server.py
+```
+Open **http://127.0.0.1:8765**. Stop with Ctrl+C. On Windows activate with `.venv\Scripts\activate`.
 
-The simulator completed the instruction “Move the small blue block to the left tray.” This screenshot shows the resulting scene and success message.
+Try `Move the red object to the left tray`. Change scenario to test ambiguity, oversize rejection, or a blocked route. Enable **Simulate a failed grasp** to demonstrate independent placement verification. Change the seed for new shapes, dimensions, and positions. Each run starts from its seed; it is an independent experiment, not a persistent multi-command world.
 
-## Run
-Open `dist/index.html` in a browser. No installation, API key, robot, or backend required. Alternatively run `python3 -m http.server 8000 --directory dist` and open http://localhost:8000.
+## Reproduce checks and results
+```bash
+python -m unittest -v
+python evaluate.py
+```
+`evidence/experiments.csv` contains individual trials. `summary.json` records measured results and versions. The three PNGs are genuine program-generated camera/perception outputs, not photographs or browser screenshots. Session CSV is available in the interface.
 
-## Test
-Run `node test.cjs` (Node.js required). Nine checks cover selection, destination parsing, ambiguity, oversize rejection, missing objects, unsupported commands, invalid destinations, conflicting descriptions, and already-sorted objects.
+## Requirement mapping
+| Requirement | Implementation |
+|---|---|
+| Python | Core pipeline, server, tests and evaluation |
+| OpenCV vision | HSV segmentation, contours, moments, bounding boxes, polygon classification |
+| Language | Constrained parser extracts colour, size, shape, destination and permitted action |
+| A* planning | Four-connected pixel search; obstacle dilation by conservative object radius plus margin |
+| Manipulation reasoning | Perceived centroid as grasp point, horizontal opening limit, tray fit and clearance |
+| Evaluation | Ground-truth perception/selection scoring, expected outcomes, planning time and path length |
+| Safety checks | Ambiguity, unknown instructions, oversize, unreachable placement and invalid destinations |
+| Verification | Detect again after execution; require departure from source and increased matching-object count in tray |
 
-## Try
-- Move the small blue block to the left tray.
-- Put the green circle into the right tray.
-- Move the blue object to the left tray. (Ambiguous.)
-- Move the large blue block to the right tray. (Too large.)
+## Source guide
+- `core.py`: scene generator, renderer, image-only perception, language parser, planner, executor, verifier.
+- `server.py`: loopback HTTP interface. No cloud model, account, or API key.
+- `index.html`: input, camera views, detections, session CSV.
+- `test_core.py`: functional and safety checks.
+- `evaluate.py`: deterministic held-out evaluation seeds 100–119; development seeds are 0–19.
 
-The parser accepts move/put/place/sort, red/blue/green, small/large, block/circle (square/disk aliases), and left/right tray or bin. No arbitrary natural language or multi-step commands are supported.
+## Information boundary
+`detect(image)` and `plan(image, command)` never receive object metadata. `verify(before, after, chosen, tray)` uses pixels plus the selected visual description. Only renderer, executor, and evaluator access world truth. Known tray coordinates, camera resolution, colour thresholds, gripper limit and workspace boundaries are calibrated constants.
 
-## Architecture
-`dist/engine.js`: pure deterministic parser, object selection, and validation.
-`dist/app.js`: scene state, SVG rendering, animation, session metrics, CSV export.
-`dist/style.css`: responsive interface.
-`dist/index.html`: interface and scope documentation.
+## Assumptions and limits
+This is symbolic AI with classical computer vision, not a trained language or vision-language model. The detector is designed for isolated rigid blocks and circles in clean synthetic images. New seeds give unseen arrangements/size-shape combinations within this constrained generator; they do not prove real-world generalisation. Colour/shape vocabulary stays fixed.
 
-Pipeline: instruction → constrained grammar → object matching → ambiguity and capacity checks → pick/transfer/release sequence → state verification.
+The model is 2D. It does not simulate robot joints, inverse kinematics, forces, friction, occlusion, rotation or grasp stability. Approach to the grasp point is assumed to occur overhead; A* checks the carried-object transfer. The payload uses a conservative circular envelope (half bounding-box diagonal plus margin). There is no claim of real physical handling. The executor models perfect movement unless failure injection is enabled.
 
-## Assignment evaluation
-Reset the scene between independent experiments. Run valid commands plus ambiguous, missing-object, and oversized-object cases. Export the session CSV. Report successful valid tasks separately from correctly rejected invalid tasks. Duration is UI execution time including animation, not robot latency. Reset retains logs; reload starts a fresh session.
+Pipeline planning time includes parsing, detection, selection, mask construction and A*, excludes execution and UI rendering. Rejected tasks do not have planning times recorded. Tests of valid task success must be reported separately from correct rejection. Verification is independent of the executor's success flag but shares the same vision algorithm, so correlated perception errors remain possible.
 
-## Limitations
-This project uses JavaScript for a self-contained browser experience, not Python. It has no trained AI model, computer vision, physical dynamics, inverse kinematics, or obstacle avoidance. Coordinates and properties come from simulator state. A virtual overhead lift is assumed during transfer. The gripper capacity is 50 abstract units; the large block is 70. Objects have predefined properties; this does not demonstrate generalisation to unseen physical objects. External Google Fonts are optional; fallback fonts work offline. All command processing stays in the browser.
-
-## Skills demonstrated
-Programming, constrained language parsing, symbolic reasoning, state management, action sequencing, interactive simulation, validation, and experimental reporting.
+## Relationship to the research topic
+Demonstrates the modular reasoning chain behind instruction-guided manipulation. It is an introductory prototype, not a reproduction of a research system or evidence of arbitrary unfamiliar-object grasping.

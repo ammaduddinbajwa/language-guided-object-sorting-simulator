@@ -1,0 +1,101 @@
+seed,case,perception_correct,selection_correct,planning_ms,path_pixels,outcome,expected_outcome,reason
+100,normal,1,1,8.415,119,verified,verified,
+100,oversize,1,,,,rejected,rejected,Object exceeds the 50-pixel gripper opening.
+100,ambiguous,1,,,,rejected,rejected,Ambiguous command: add shape or size.
+100,blocked,1,,,,rejected,rejected,No collision-free route to the tray.
+100,failed_grasp,1,1,8.015,119,failed_verification,failed_verification,
+101,normal,1,1,10.894,111,verified,verified,
+101,oversize,1,,,,rejected,rejected,Object exceeds the 50-pixel gripper opening.
+101,ambiguous,1,,,,rejected,rejected,Ambiguous command: add shape or size.
+101,blocked,1,,,,rejected,rejected,No collision-free route to the tray.
+101,failed_grasp,1,1,13.836,111,failed_verification,failed_verification,
+102,normal,1,1,20.777,113,verified,verified,
+102,oversize,1,,,,rejected,rejected,Object exceeds the 50-pixel gripper opening.
+102,ambiguous,1,,,,rejected,rejected,Ambiguous command: add shape or size.
+102,blocked,1,,,,rejected,rejected,No collision-free route to the tray.
+102,failed_grasp,1,1,16.464,113,failed_verification,failed_verification,
+103,normal,1,1,9.503,116,verified,verified,
+103,oversize,1,,,,rejected,rejected,Object exceeds the 50-pixel gripper opening.
+103,ambiguous,1,,,,rejected,rejected,Ambiguous command: add shape or size.
+103,blocked,1,,,,rejected,rejected,No collision-free route to the tray.
+103,failed_grasp,1,1,9.793,116,failed_verification,failed_verification,
+104,normal,1,1,12.462,118,verified,verified,
+104,oversize,1,,,,rejected,rejected,Object exceeds the 50-pixel gripper opening.
+104,ambiguous,1,,,,rejected,rejected,Ambiguous command: add shape or size.
+104,blocked,1,,,,rejected,rejected,No collision-free route to the tray.
+104,failed_grasp,1,1,12.32,118,failed_verification,failed_verification,
+105,normal,1,1,26.968,126,verified,verified,
+105,oversize,1,,,,rejected,rejected,Object exceeds the 50-pixel gripper opening.
+105,ambiguous,1,,,,rejected,rejected,Ambiguous command: add shape or size.
+105,blocked,1,,,,rejected,rejected,No collision-free route to the tray.
+105,failed_grasp,1,1,15.644,126,failed_verification,failed_verification,
+106,normal,1,1,11.397,118,verified,verified,
+106,oversize,1,,,,rejected,rejected,Object exceeds the 50-pixel gripper opening.
+106,ambiguous,1,,,,rejected,rejected,Ambiguous command: add shape or size.
+106,blocked,1,,,,rejected,rejected,No collision-free route to the tray.
+106,failed_grasp,1,1,13.64,118,failed_verification,failed_verification,
+107,normal,1,1,13.43,125,verified,verified,
+107,oversize,1,,,,rejected,rejected,Object exceeds the 50-pixel gripper opening.
+107,ambiguous,1,,,,rejected,rejected,Ambiguous command: add shape or size.
+107,blocked,1,,,,rejected,rejected,No collision-free route to the tray.
+107,failed_grasp,1,1,15.317,125,failed_verification,failed_verification,
+108,normal,1,1,14.856,132,verified,verified,
+108,oversize,1,,,,rejected,rejected,Object exceeds the 50-pixel gripper opening.
+108,ambiguous,1,,,,rejected,rejected,Ambiguous command: add shape or size.
+108,blocked,1,,,,rejected,rejected,No collision-free route to the tray.
+108,failed_grasp,1,1,15.52,132,failed_verification,failed_verification,
+109,normal,1,1,13.117,119,verified,verified,
+109,oversize,1,,,,rejected,rejected,Object exceeds the 50-pixel gripper opening.
+109,ambiguous,1,,,,rejected,rejected,Ambiguous command: add shape or size.
+109,blocked,1,,,,rejected,rejected,No collision-free route to the tray.
+109,failed_grasp,1,1,13.311,119,failed_verification,failed_verification,
+110,normal,1,1,11.597,109,verified,verified,
+110,oversize,1,,,,rejected,rejected,Object exceeds the 50-pixel gripper opening.
+110,ambiguous,1,,,,rejected,rejected,Ambiguous command: add shape or size.
+110,blocked,1,,,,rejected,rejected,No collision-free route to the tray.
+110,failed_grasp,1,1,11.239,109,failed_verification,failed_verification,
+111,normal,1,1,13.156,114,verified,verified,
+111,oversize,1,,,,rejected,rejected,Object exceeds the 50-pixel gripper opening.
+111,ambiguous,1,,,,rejected,rejected,Ambiguous command: add shape or size.
+111,blocked,1,,,,rejected,rejected,No collision-free route to the tray.
+111,failed_grasp,1,1,12.759,114,failed_verification,failed_verification,
+112,normal,1,1,12.527,113,verified,verified,
+112,oversize,1,,,,rejected,rejected,Object exceeds the 50-pixel gripper opening.
+112,ambiguous,1,,,,rejected,rejected,Ambiguous command: add shape or size.
+112,blocked,1,,,,rejected,rejected,No collision-free route to the tray.
+112,failed_grasp,1,1,13.286,113,failed_verification,failed_verification,
+113,normal,1,1,14.703,106,verified,verified,
+113,oversize,1,,,,rejected,rejected,Object exceeds the 50-pixel gripper opening.
+113,ambiguous,1,,,,rejected,rejected,Ambiguous command: add shape or size.
+113,blocked,1,,,,rejected,rejected,No collision-free route to the tray.
+113,failed_grasp,1,1,12.534,106,failed_verification,failed_verification,
+114,normal,1,1,14.453,134,verified,verified,
+114,oversize,1,,,,rejected,rejected,Object exceeds the 50-pixel gripper opening.
+114,ambiguous,1,,,,rejected,rejected,Ambiguous command: add shape or size.
+114,blocked,1,,,,rejected,rejected,No collision-free route to the tray.
+114,failed_grasp,1,1,14.423,134,failed_verification,failed_verification,
+115,normal,1,1,8.486,117,verified,verified,
+115,oversize,1,,,,rejected,rejected,Object exceeds the 50-pixel gripper opening.
+115,ambiguous,1,,,,rejected,rejected,Ambiguous command: add shape or size.
+115,blocked,1,,,,rejected,rejected,No collision-free route to the tray.
+115,failed_grasp,1,1,21.674,117,failed_verification,failed_verification,
+116,normal,1,1,13.057,111,verified,verified,
+116,oversize,1,,,,rejected,rejected,Object exceeds the 50-pixel gripper opening.
+116,ambiguous,1,,,,rejected,rejected,Ambiguous command: add shape or size.
+116,blocked,1,,,,rejected,rejected,No collision-free route to the tray.
+116,failed_grasp,1,1,10.568,111,failed_verification,failed_verification,
+117,normal,1,1,9.364,113,verified,verified,
+117,oversize,1,,,,rejected,rejected,Object exceeds the 50-pixel gripper opening.
+117,ambiguous,1,,,,rejected,rejected,Ambiguous command: add shape or size.
+117,blocked,1,,,,rejected,rejected,No collision-free route to the tray.
+117,failed_grasp,1,1,9.057,113,failed_verification,failed_verification,
+118,normal,1,1,10.809,109,verified,verified,
+118,oversize,1,,,,rejected,rejected,Object exceeds the 50-pixel gripper opening.
+118,ambiguous,1,,,,rejected,rejected,Ambiguous command: add shape or size.
+118,blocked,1,,,,rejected,rejected,No collision-free route to the tray.
+118,failed_grasp,1,1,10.847,109,failed_verification,failed_verification,
+119,normal,1,1,10.806,116,verified,verified,
+119,oversize,1,,,,rejected,rejected,Object exceeds the 50-pixel gripper opening.
+119,ambiguous,1,,,,rejected,rejected,Ambiguous command: add shape or size.
+119,blocked,1,,,,rejected,rejected,No collision-free route to the tray.
+119,failed_grasp,1,1,14.43,116,failed_verification,failed_verification,

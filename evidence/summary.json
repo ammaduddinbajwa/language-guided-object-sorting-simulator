@@ -1,0 +1,31 @@
+{
+  "trials": 100,
+  "perception_correct": 100,
+  "expected_outcomes": 100,
+  "by_case": {
+    "oversize": {
+      "trials": 20,
+      "expected": 20
+    },
+    "ambiguous": {
+      "trials": 20,
+      "expected": 20
+    },
+    "blocked": {
+      "trials": 20,
+      "expected": 20
+    },
+    "failed_grasp": {
+      "trials": 20,
+      "expected": 20
+    },
+    "normal": {
+      "trials": 20,
+      "expected": 20
+    }
+  },
+  "mean_planning_ms": 13.136,
+  "python": "3.12.4",
+  "opencv": "5.0.0",
+  "numpy": "2.5.4"
+}
