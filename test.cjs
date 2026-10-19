@@ -1,0 +1,11 @@
+const assert=require('node:assert/strict');const {initial,plan}=require('./dist/engine.js');let o=initial();
+assert.equal(plan('Move the small blue block to the left tray.',o).id,'B1');
+assert.equal(plan('Put the green circle into the right tray',o).tray,'right');
+assert.match(plan('Move the blue object to the left tray',o).message,/Ambiguous/);
+assert.match(plan('Move the large blue block to the right tray',o).message,/too large/);
+assert.match(plan('Move the large green block to the right tray',o).message,/No object/);
+assert.equal(plan('Delete everything',o).ok,false);
+assert.equal(plan('Move the red block to the outside tray',o).ok,false);
+assert.equal(plan('Move the red blue block to the left tray',o).ok,false);
+o[0].tray='left';assert.match(plan('Move the red block to the left tray',o).message,/already/);
+console.log('9 functional checks passed');
