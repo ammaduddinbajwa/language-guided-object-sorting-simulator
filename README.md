@@ -2,6 +2,12 @@
 
 An assignment-scale browser application demonstrating rule-based language understanding, object selection, action sequencing, capacity validation, and a 2D animated pick-and-place simulation.
 
+## Demo screenshot
+
+![Small blue block successfully placed in the left tray](docs/screenshots/sorting-demo.jpg)
+
+The simulator completed the instruction “Move the small blue block to the left tray.” This screenshot shows the resulting scene and success message.
+
 ## Run
 Open `dist/index.html` in a browser. No installation, API key, robot, or backend required. Alternatively run `python3 -m http.server 8000 --directory dist` and open http://localhost:8000.
 
