@@ -2,6 +2,12 @@
 
 A small Python robotics assignment: instruction → image perception → grasp feasibility → collision-aware carrying route → execution → image-based verification.
 
+## Simulator preview
+
+![Detected objects and planned route around obstacles](evidence/04-obstacle-route.png)
+
+Program-generated simulator output showing detected objects and the planned route around obstacles to the right tray.
+
 ## Start on macOS / Linux
 Requires Python 3.12 (tested), internet for first dependency installation, and a browser.
 
@@ -20,7 +26,7 @@ Try `Move the red object to the left tray`. Change scenario to test ambiguity, o
 python -m unittest -v
 python evaluate.py
 ```
-`evidence/experiments.csv` contains individual trials. `summary.json` records measured results and versions. The three PNGs are genuine program-generated camera/perception outputs, not photographs or browser screenshots. Session CSV is available in the interface.
+`evidence/experiments.csv` contains individual trials. `summary.json` records measured results and versions. The four PNGs are genuine program-generated camera/perception outputs, not photographs or browser screenshots. Session CSV is available in the interface.
 
 ## Requirement mapping
 | Requirement | Implementation |
