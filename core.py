@@ -16,6 +16,7 @@ def scene(seed=0,case='normal'):
     obs=[(250,115,270,255),(370,200,390,340)]
     if case=='oversize':objs[0].radius=35
     if case=='ambiguous':objs.append(Object('red','circle',190,330,12))
+    if case=='one_empty':objs[1].x,objs[1].y=65,200
     if case=='blocked':obs=[(125,0,145,H-1)]
     return {'objects':objs,'obstacles':obs}
 
@@ -90,10 +91,20 @@ def plan(im,command):
     matches=[o for o in objects if all(o[k]==v for k,v in spec.items() if k!='tray')]
     if not matches:raise ValueError('No matching object detected.')
     if len(matches)>1:raise ValueError('Ambiguous command: add shape or size.')
-    obj=matches[0]
+    return plan_selected(im,matches[0],spec['tray'],started=t)
+
+def plan_selected(im,obj,tray,started=None):
+    t=time.perf_counter() if started is None else started
+    if tray not in TRAYS:raise ValueError('Invalid destination.')
+    current=detect(im)
+    found=[o for o in current if all(o[k]==obj[k] for k in ['color','shape','x','y','width','height'])]
+    if len(found)!=1:raise ValueError('Selected object is stale or invalid.')
+    obj=found[0]
+    x1,y1,x2,y2=TRAYS[tray]
+    if x1<obj['x']<x2 and y1<obj['y']<y2:raise ValueError('Object already in destination tray.')
     if obj['width']>50:raise ValueError('Object exceeds the 50-pixel gripper opening.')
     radius=math.ceil(math.hypot(obj['width'],obj['height'])/2)+3
-    mask=occupancy(im,obj,radius);x1,y1,x2,y2=TRAYS[spec['tray']]
+    mask=occupancy(im,obj,radius);x1,y1,x2,y2=TRAYS[tray]
     goals=[(x,y) for y in range(y1+radius+1,y2-radius,20) for x in range(x1+radius+1,x2-radius,20) if not mask[y,x]]
     if not goals:raise ValueError('No free placement with sufficient tray clearance.')
     _,components=cv2.connectedComponents((mask==0).astype(np.uint8),connectivity=4)
@@ -105,7 +116,7 @@ def plan(im,command):
         path=astar(mask,(obj['x'],obj['y']),goal)
         if path:break
     if not path:raise ValueError('No collision-free route to the tray.')
-    return {'object':obj,'tray':spec['tray'],'path':path,'radius':radius,'planning_ms':(time.perf_counter()-t)*1000,'mask':mask}
+    return {'object':obj,'tray':tray,'path':path,'radius':radius,'planning_ms':(time.perf_counter()-t)*1000,'mask':mask}
 
 def verify(before,after,chosen,tray):
     """Check new image: matching object inside tray and departed source."""

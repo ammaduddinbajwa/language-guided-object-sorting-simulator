@@ -1,0 +1,13 @@
+case,mode,expected,outcome,correct,api_ms,total_ms,model,response_id
+canonical,rules,verified,verified,True,0,25.36,,
+paraphrase,rules,verified,reject,False,,0.01,,
+smallest,rules,verified,reject,False,,0.02,,
+empty,rules,verified,reject,False,,0.01,,
+ambiguous_object,rules,reject,reject,True,,1.38,,
+ambiguous_tray,rules,reject,reject,True,,0.01,,
+oversize,rules,reject,reject,True,,2.45,,
+blocked,rules,reject,reject,True,,7.83,,
+unsupported,rules,reject,reject,True,,0.0,,
+injection,rules,reject,reject,True,,0.0,,
+missing,rules,reject,reject,True,,0.01,,
+grasp_failure,rules,failed_verification,failed_verification,True,0,11.34,,

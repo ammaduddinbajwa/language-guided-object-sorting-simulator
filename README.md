@@ -2,6 +2,12 @@
 
 A small Python robotics assignment: instruction → image perception → grasp feasibility → collision-aware carrying route → execution → image-based verification.
 
+## Foundation-model extension
+
+Optional **text + scene** and **image + scene** API modes now complement the offline rule baseline. See [FOUNDATION_MODELS.md](FOUNDATION_MODELS.md) for setup and evaluation.
+
+**Status:** 23 local tests pass, including mocked API integration tests. Real API evaluation is pending credentials; no live model accuracy is claimed. The 12-case rule baseline scores 9/12 expected outcomes.
+
 ## Simulator preview
 
 ![Detected objects and planned route around obstacles](evidence/04-obstacle-route.png)
@@ -42,7 +48,7 @@ python evaluate.py
 
 ## Source guide
 - `core.py`: scene generator, renderer, image-only perception, language parser, planner, executor, verifier.
-- `server.py`: loopback HTTP interface. No cloud model, account, or API key.
+- `server.py`: loopback HTTP interface. Rules need no key; optional API modes use server-side credentials.
 - `index.html`: input, camera views, detections, session CSV.
 - `test_core.py`: functional and safety checks.
 - `evaluate.py`: deterministic held-out evaluation seeds 100–119; development seeds are 0–19.
@@ -51,7 +57,7 @@ python evaluate.py
 `detect(image)` and `plan(image, command)` never receive object metadata. `verify(before, after, chosen, tray)` uses pixels plus the selected visual description. Only renderer, executor, and evaluator access world truth. Known tray coordinates, camera resolution, colour thresholds, gripper limit and workspace boundaries are calibrated constants.
 
 ## Assumptions and limits
-This is symbolic AI with classical computer vision, not a trained language or vision-language model. The detector is designed for isolated rigid blocks and circles in clean synthetic images. New seeds give unseen arrangements/size-shape combinations within this constrained generator; they do not prove real-world generalisation. Colour/shape vocabulary stays fixed.
+The offline baseline uses symbolic AI and classical computer vision. Optional API modes connect a pretrained model for instruction interpretation; no model is trained or fine-tuned here. The detector is designed for isolated rigid blocks and circles in clean synthetic images. New seeds give unseen arrangements/size-shape combinations within this constrained generator; they do not prove real-world generalisation. Colour/shape vocabulary stays fixed.
 
 The model is 2D. It does not simulate robot joints, inverse kinematics, forces, friction, occlusion, rotation or grasp stability. Approach to the grasp point is assumed to occur overhead; A* checks the carried-object transfer. The payload uses a conservative circular envelope (half bounding-box diagonal plus margin). There is no claim of real physical handling. The executor models perfect movement unless failure injection is enabled.
 
@@ -59,3 +65,4 @@ Pipeline planning time includes parsing, detection, selection, mask construction
 
 ## Relationship to the research topic
 Demonstrates the modular reasoning chain behind instruction-guided manipulation. It is an introductory prototype, not a reproduction of a research system or evidence of arbitrary unfamiliar-object grasping.
+

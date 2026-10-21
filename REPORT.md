@@ -8,7 +8,7 @@ Scenes are 640 × 400 pixels with three coloured rigid shapes, known trays and d
 
 Commands follow a restricted grammar. Ambiguous descriptions are rejected. The opening limit is 50 pixels. Obstacles and other objects are dilated by half the selected bounding-box diagonal plus three pixels. Free-space connectivity rejects unreachable destinations; four-connected A* finds a unit-cost carrying route. Destination centres must keep the payload inside the tray. Verification detects objects again and requires both departure from the source and a new matching detection inside the destination.
 
-## Measured results
+## Original baseline measured results
 Nine automated functional tests passed. Evaluation used 100 trials across held-out scene seeds 100–119 (20 per case).
 
 | Case | Expected result | Correct / trials |
@@ -29,3 +29,8 @@ The project demonstrates Python, image-based perception, constrained language un
 
 ## Limitations
 No physical dynamics, joints, grip force, depth, rotation or contact simulation. Approach is assumed overhead; only payload transfer is collision-planned. Colour thresholds and trays are calibrated. Verification shares the detector and can therefore share its errors. All success rates apply only to these clean synthetic tests. Further work should include noisy/occluded scenes, richer shapes, physically simulated grasps and a separately tested verifier.
+
+
+## Foundation-model extension
+
+Optional text+scene and image+scene API adapters translate instructions into validated symbolic constraints. Model output cannot bypass geometry checks. The offline suite has 23 passing tests, including mocked API transport. The paired 12-case baseline has 9 correct outcomes. **Live API evaluation remains pending credentials.** The original 100-trial results do not evaluate foundation models. See FOUNDATION_MODELS.md for reproduction and limitations.
